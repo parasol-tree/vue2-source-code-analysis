@@ -29,7 +29,8 @@ export default {
     serve({
       port: 3000,
       openPage: './index.html',
-      contentBase: ''
+      contentBase: '',
+      historyApiFallback: false, // Set to true to return index.html (200) instead of error page (404)
     }),
     alias({
       entries: [
