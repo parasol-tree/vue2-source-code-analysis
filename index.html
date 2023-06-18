@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- <div id="app">wocao {{ msg }}<h1>111<span>222</span></h1></div> -->
+  <!-- <div id="app" style="color: red;font-size: 20px;font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;">wocao {{ msg }}</div> -->
+  <!-- <div id="app" style="color: red;font-size: 20px;">wocao</div> -->
+  <!-- <div id="app" style="color: red;font-size: 20px;">wocao {{ msg }} </div> -->
+  <!-- <div id="app" style="color: red;font-size: 20px;"> hello {{ msg }} word <h1>ceshi</h1> </div> -->
+  <!-- <div id="app" style="color: red;font-size: 20px;"> hello {{ msg }}<h1> 张三 </h1> </div> -->
+  <!-- <div id="app" style="color: red;font-size: 20px;"> {{ msg }} </div> -->
+  <!-- <div id="app" style="color: red;font-size: 20px;"> {{ obj1 }} </div> -->
+  <!-- <div id="app" style="color: red;font-size: 20px;"> {{ obj2 }} </div> -->
+  <!-- <div id="app" style="color: red;font-size: 20px;">{{list}}</div> -->
+  <!-- <div id="app" style="color: red;font-size: 20px;"><h1>{{msg}}</h1><h2>{{list}}</h2></div> -->
+  <button id="btn1">清空数组</button>
+  <button id="btn2">设置数组 qwertyui</button>
+  <button id="btn3">设置数组 +new Date()</button>
+  <button id="btn4">设置msg</button>
+  <button id="btn5">设置info.a.b</button>
+  <div id="app" style="color: red;font-size: 20px;font-weight: 900;">{{msg}}{{list}}</div>
+</body>
+</html>
+<script src="dist/vue.js"></script>
+<script>
+  // Vue._gMixinFn({
+  //   beforeCreate: function a () {
+  //     console.log('beforeCreate a')
+  //   },
+  //   created: function a () {
+  //     console.log('_gMixinFn creared a')
+  //   },
+  //   beforeMount: function a () {
+  //     console.log('beforeMount a')
+  //   },
+  //   mounted: function a () {
+  //     console.log('mounted a')
+  //   },
+  // })
+  // Vue._gMixinFn({
+  //   beforeCreate: function b () {
+  //     console.log('beforeCreate b')
+  //   },
+  //   created: function b () {
+  //     console.log('_gMixinFn creared b')
+  //   },
+  //   beforeMount: function b () {
+  //     console.log('beforeMount b')
+  //   },
+  //   mounted: function b () {
+  //     console.log('mounted b')
+  //   },
+  // })
+
+  const vm = new Vue({
+    el: '#app',
+    data () {
+      // console.log('data this', this)
+      return {
+        msg: 'hello',
+        // msg1: 'hello1',
+        // obj1: { a: 10, b: 20, c: { name: 'zhang' } },
+        // obj2: { a: 10 },
+        // list: [1, [2]],
+        list: [1],
+        // list2: [{ a: 1 }, 2]
+        info: {
+          a: {
+            b: 1
+          }
+        }
+      }
+    },
+    // props: {},
+    watch: {
+      'info.a.b': {
+        handler: function (newValue, oldValue) {
+          console.log('watch.info.a.b newValue', newValue)
+          console.log('watch.info.a.b oldValue', oldValue)
+        },
+      },
+      msg: function (newValue, oldValue) {
+        console.log('watch.msg newValue', newValue)
+        console.log('watch.msg oldValue', oldValue)
+      },
+      // msg: {
+      //   handler: function (newValue, oldValue) {
+      //     console.log('watch.msg', newValue, oldValue)
+      //   },
+      //   immediate: true
+      // }
+      // list: function (newValue, oldValue) {
+      //   console.log('watch.list', newValue, oldValue)
+      // }
+    },
+    // computed: {},
+    // beforeCreate: function A () {
+    //   console.log('beforeCreate A', this.msg)
+    // },
+    // created: function A () {
+    //   console.log('created A', this.msg)
+    // },
+    // beforeMount: function A () {
+    //   console.log('beforeMount A')
+    //   // console.log('beforeMount A')
+    // },
+    // mounted: function A () {
+    //   // console.log('mounted A')
+    //   this._$nextTick(function () {
+    //     console.log('this 0', this);
+    //   })
+    //   this._$nextTick(() => {
+    //     console.log('this 1', this.list);
+    //   })
+    //   // this._$nextTick('sd')
+    // },
+    // methods: {
+    //   func () {
+    //     console.log('methods.func')
+    //   }
+    // },
+  })
+  // console.log('vm --->', vm);
+  // console.log('vm._data --->', vm._data.msg);
+  // setTimeout(() => {
+  //   vm._data.msg = 'wocao'
+  // }, 2000);
+
+  // console.log('vm._data --->', vm._data);
+  // console.log('vm._data --->', vm._data.a);
+  // vm._data.a = { c: 30 }
+  // console.log('vm._data --->', vm._data.a);
+
+
+  // console.log('vm._data --->', vm._data.list);
+  // setTimeout(() => {
+  //   vm._data.list.push(5)
+  //   console.log('setTimeout vm._data --->', vm._data.list);
+  // }, 2000);
+
+  // vm._data.list.splice(4, 1, 5)
+  // vm._data.list.splice(2)
+  // console.log('vm._data --->', vm._data.list);
+
+  // vm._data.list2.push({ b: 2})
+  // console.log('vm._data --->', vm._data.list);
+  // console.log('vm._data --->', vm._data.list2);
+
+  // console.log('vm._data --->', vm.msg = 'wocao');
+  // console.log('vm._data --->', vm);
+
+// setTimeout(() => {
+//   // vm.msg = 'wocao'
+//   // console.log('setTimeout 2000ms 000 vm', vm.msg)
+//   // vm.list.push(5)
+//   vm.list = []
+//   vm.list.push('qwertyui')
+//   console.log('setTimeout 2000ms 111 vm --->', vm.list)
+//   // vm._updateFn(vm._renderFn()) // 借用这两个方法实现数据和视图自动更新
+// }, 2000);
+// setTimeout(() => {
+//   vm.list.push(2)
+//   vm.list.push(3)
+//   vm.list.push(4)
+//   console.log('vm 0', vm._$el);
+//   Vue._g$nextTick(() => {
+//     console.log('vm nextTick', vm._$el);
+//   })
+// }, 3000);
+
+
+// vm.list.push(2)
+// vm.list.push(3)
+// vm.list.push(4)
+// console.log('vm 0', vm._$el.innerHTML);
+// vm._$nextTick(() => {
+//   console.log('vm nextTick innerHTML', vm._$el.innerHTML);
+// })
+
+btn1.onclick = function () {
+  vm.list = []
+  // console.log('btn1.onclick --->', vm.list)
+}
+btn2.onclick = function () {
+  vm.list.push('qwertyui')
+  // console.log('btn2.onclick --->', vm.list)
+}
+btn3.onclick = function () {
+  vm.list.push(+new Date())
+  // console.log('btn3.onclick --->', vm.list)
+}
+btn4.onclick = function () {
+  vm.msg = 'wocao'
+  // console.log('btn3.onclick --->', vm.list)
+}
+btn5.onclick = function () {
+  vm.info.a.b = 2000
+  // console.log('btn3.onclick --->', vm.list)
+}
+</script>
