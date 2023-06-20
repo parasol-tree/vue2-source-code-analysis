@@ -29,7 +29,7 @@ function startFn (tagName, attrs) {
   stack.push(element)
 }
 function textFn (text) {
-  // text = text.replace(/\s/g, '') // 去除 文本的所有空格
+  text = text.replace(/\s/g, '') // 去除 文本的所有空格
   // text = text.trim() // 去除 文本的 首尾空格
   if (text) {
     currentParent.children.push({ type: 3, text: text })
@@ -112,8 +112,14 @@ function parseHtmlFn (html) {
   function getStrByIndexFn (str, indexStart) {
     return str.substring(indexStart)
   }
-  // console.log('parseHtmlFn root --->', root)
-  return root
+  const _res = JSON.parse(JSON.stringify(root))
+  // // 解析结束重置数据
+  root = null // 跟元素
+  currentParent = null // 当前元素的父元素
+  stack.splice(0, stack.length) // 栈
+  // console.log('parseHtmlFn root --->', _res)
+  return _res
+  // return root
 }
 
 export {

@@ -23,43 +23,74 @@
   <button id="btn3">设置数组 +new Date()</button>
   <button id="btn4">设置msg</button>
   <button id="btn5">设置info.a.b</button>
-  <div id="app" style="color: red;font-size: 20px;font-weight: 900;">{{msg}}{{list}}</div>
+  <div id="btt1"><button>测试-button1</button></div>
+  <!-- <div id="app" style="color: red;font-size: 20px;font-weight: 900;">卧槽{{msg}}{{list}}{{name}}<my-button></my-button></div> -->
+  <div id="app">
+    嘚嘚{{msg}}{{list}}{{name}}卧槽
+    <my-button></my-button>
+    <!-- <my-button></my-button>
+    <my-button></my-button>
+    <my-button></my-button>
+    <my-button></my-button>
+    <my-button></my-button> -->
+  </div>
 </body>
 </html>
 <script src="dist/vue.js"></script>
 <script>
-  // Vue._gMixinFn({
-  //   beforeCreate: function a () {
-  //     console.log('beforeCreate a')
-  //   },
-  //   created: function a () {
-  //     console.log('_gMixinFn creared a')
-  //   },
-  //   beforeMount: function a () {
-  //     console.log('beforeMount a')
-  //   },
-  //   mounted: function a () {
-  //     console.log('mounted a')
-  //   },
+  // Vue._g$mixinFn({
+  //   // data: function a () {
+  //   //   return {
+  //   //     name: '张三'
+  //   //   }
+  //   // },
+  //   // watch: {
+  //   //   name: function (newVal, oldVal) {
+  //   //     console.log('watch.name newVal', newVal)
+  //   //     console.log('watch.name oldVal', oldVal)
+  //   //   }
+  //   // },
+  //   // beforeCreate: function a () {
+  //   //   console.log('beforeCreate a')
+  //   // },
+  //   // created: function a () {
+  //   //   console.log('_g$mixinFn creared a', this.name)
+  //   //   setTimeout(() => {
+  //   //     this.name = '李斯'
+  //   //   }, 2000);
+  //   // },
+  //   // beforeMount: function a () {
+  //   //   console.log('_g$mixinFn beforeMount a')
+  //   // },
+  //   // mounted: function a () {
+  //   //   console.log('_g$mixinFn mounted a')
+  //   // },
   // })
-  // Vue._gMixinFn({
+  // Vue._g$mixinFn({
   //   beforeCreate: function b () {
-  //     console.log('beforeCreate b')
+  //     console.log('_g$mixinFn beforeCreate b')
   //   },
   //   created: function b () {
-  //     console.log('_gMixinFn creared b')
+  //     console.log('_g$mixinFn creared b')
   //   },
   //   beforeMount: function b () {
-  //     console.log('beforeMount b')
+  //     console.log('_g$mixinFn beforeMount b')
   //   },
   //   mounted: function b () {
-  //     console.log('mounted b')
+  //     console.log('_g$mixinFn mounted b')
   //   },
   // })
-
+    Vue._g$componentFn('my-button', {
+      template: '<button>全局-button</button>'
+    })
   const vm = new Vue({
     el: '#app',
-    data () {
+    components: {
+      // 'my-button': { template: '<button>内部-button</button>' }
+      // 'my-button': { template: '#btt1' }
+      'my-button': { template: document.querySelector('#btt1') }
+    },
+    data: function A () {
       // console.log('data this', this)
       return {
         msg: 'hello',
@@ -77,33 +108,36 @@
       }
     },
     // props: {},
-    watch: {
-      'info.a.b': {
-        handler: function (newValue, oldValue) {
-          console.log('watch.info.a.b newValue', newValue)
-          console.log('watch.info.a.b oldValue', oldValue)
-        },
-      },
-      msg: function (newValue, oldValue) {
-        console.log('watch.msg newValue', newValue)
-        console.log('watch.msg oldValue', oldValue)
-      },
-      // msg: {
-      //   handler: function (newValue, oldValue) {
-      //     console.log('watch.msg', newValue, oldValue)
-      //   },
-      //   immediate: true
-      // }
-      // list: function (newValue, oldValue) {
-      //   console.log('watch.list', newValue, oldValue)
-      // }
-    },
+    // watch: {
+    //   'info.a.b': {
+    //     handler: function watchinfo_a_b (newValue, oldValue) {
+    //       console.log('watch.info.a.b newValue', newValue)
+    //       console.log('watch.info.a.b oldValue', oldValue)
+    //     },
+    //   },
+    //   msg: function watchMsg (newValue, oldValue) {
+    //     console.log('watch.msg newValue', newValue)
+    //     console.log('watch.msg oldValue', oldValue)
+    //   },
+    //   // msg: {
+    //   //   handler: function (newValue, oldValue) {
+    //   //     console.log('watch.msg', newValue, oldValue)
+    //   //   },
+    //   //   immediate: true
+    //   // }
+    //   // list: function (newValue, oldValue) {
+    //   //   console.log('watch.list', newValue, oldValue)
+    //   // }
+    // },
     // computed: {},
     // beforeCreate: function A () {
     //   console.log('beforeCreate A', this.msg)
     // },
     // created: function A () {
     //   console.log('created A', this.msg)
+    //   setTimeout(() => {
+    //     this.msg = 'wocao'
+    //   }, 4000);
     // },
     // beforeMount: function A () {
     //   console.log('beforeMount A')
@@ -125,7 +159,7 @@
     //   }
     // },
   })
-  // console.log('vm --->', vm);
+  // console.log('html vm --->', vm);
   // console.log('vm._data --->', vm._data.msg);
   // setTimeout(() => {
   //   vm._data.msg = 'wocao'
@@ -181,6 +215,9 @@
 // vm._$nextTick(() => {
 //   console.log('vm nextTick innerHTML', vm._$el.innerHTML);
 // })
+
+// console.log('vm', vm)
+// console.log('Vue.options', Vue.options)
 
 btn1.onclick = function () {
   vm.list = []

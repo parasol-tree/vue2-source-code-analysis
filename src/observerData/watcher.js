@@ -58,15 +58,8 @@ class Watcher {
   get () {
     __pushDepTargetFn(this)// 初次渲染前  添加 Dep 的属性 target (watcher)
     const _vm = this.vm
-    let value
-    try {
-      // console.log('getter', this.getter)
-      value = this.getter.call(_vm, _vm) // 渲染 dom
-    } catch (err) {
-      console.log('err src/observerData/watcher.js --->', err)
-    } finally {
-      __popDepTargetFn() // 删除 Dep 的属性 target (watcher)
-    }
+    const value = this.getter.call(_vm, _vm) // 渲染 dom
+    __popDepTargetFn() // 删除 Dep 的属性 target (watcher)
     return value
   }
   updateFn () {

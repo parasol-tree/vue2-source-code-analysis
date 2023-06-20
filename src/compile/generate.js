@@ -1,3 +1,5 @@
+import { __hasValue } from '@/utils/hasValue.js'
+
 const defaultTagRE = /\{\{((?:.|\r?\n)+?)\}\}/g // 插值表达式 {{  }}
 
 /**
@@ -55,7 +57,7 @@ function genChildFn (child) {
  */
 function genChildrenFn (el) {
   const children = el.children
-  if (children) {
+  if (__hasValue(children) ) {
     return children.map(child => genChildFn(child)).join(',')
   }
   return undefined
@@ -72,14 +74,14 @@ function genTextFn (text = '') {
   while ((match = defaultTagRE.exec(text))) {
     matchIndex = match.index
     if (matchIndex > lastIndex) { // hello{{msg}}word 截取 插值表达式之前的文本 hello
-      textCacheArr.push(text.slice(lastIndex, matchIndex))
+      textCacheArr.push(JSON.stringify(text.slice(lastIndex, matchIndex)))
     }
     textCacheArr.push(`_parseIEFn(${match[1].trim()})`)
     lastIndex = matchIndex + match[0].length // 插值表达式最后的下标
   }
   // 小于文本的长度, 说明插值表达式后还有文本, 截取剩余的文本
   if (lastIndex < text.length) {
-    textCacheArr.push(text.slice(lastIndex))
+    textCacheArr.push(JSON.stringify(text.slice(lastIndex)))
   }
   return `_parseTextFn(${textCacheArr.join('+')})`
 }
@@ -92,8 +94,7 @@ function genTextFn (text = '') {
  */
 const generateFn = function (ast) {
   const children = genChildrenFn(ast)
-  // const code = `_parseTagFn('${ast.tag}',${ast.attrs && ast.attrs.length > 0 ? genAttrsFn(ast.attrs) : undefined},${children ? children : undefined})`
-  const attrs = (ast.attrs && ast.attrs.length > 0) ? genAttrsFn(ast.attrs) : undefined
+  const attrs = (ast.attrs && ast.attrs.length > 0) ? genAttrsFn(ast.attrs) : JSON.stringify({})
   const code = `_parseTagFn('${ast.tag}',${attrs},${children})`
   return code
 }

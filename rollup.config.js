@@ -21,10 +21,10 @@ export default {
       throwOnWarning: true,
       // include: ["src//*.js"],
       include: ['src/**/*.js'], // 需要检查的部分
-      exclude: ['node_modules/**'] // 排除的部分
+      exclude: ['node_modules/**', 'dist/**'] // 排除的部分
     }),
     babel({
-      exclude: 'node_modules/**'
+      exclude: 'node_modules/**',
     }),
     serve({
       port: 3000,

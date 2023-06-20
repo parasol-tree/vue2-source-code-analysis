@@ -1,5 +1,5 @@
-import { __parseHtmlFn } from '@/compile/parseAst.js'
-import { __generateFn } from '@/compile/generate.js'
+import { __parseHtmlFn } from './parseAst'
+import { __generateFn } from './generate'
 
 /**
  * @description 根据 ast 语法树, 获取 render 函数

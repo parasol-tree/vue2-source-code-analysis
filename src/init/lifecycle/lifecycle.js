@@ -1,8 +1,9 @@
 import { __updateElFn } from '@/vnode/updateEl.js'
 import Watcher from '@/observerData/watcher.js'
 
-const mountComponentFn = function (vm) {
+const mountComponentFn = function (vm, el) {
   callLifecycleFn('beforeMount', vm)
+  vm._$el = el
   /**
    * 禁用以前的一次性 试图更新, 改为创建一个 Watcher 来监听 数据的改变, 用以触发 试图更新 (不然每次该改据后都得用vm._updateFn(vm._renderFn()) 更新视图)
    * const vnode = vm._renderFn() // 将 render 函数变为 vnode

@@ -2,6 +2,7 @@ const path = require('path')
 const projectRootDir = path.resolve(__dirname)
 
 module.exports = {
+  ignorePatterns: ['node_modules/**', 'dist/**'], // https://eslint.org/docs/latest/use/configure/ignore
   root: true,
   parser: '@babel/eslint-parser',
   parserOptions: {
